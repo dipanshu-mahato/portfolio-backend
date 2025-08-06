@@ -2,17 +2,8 @@ import enum, uuid
 from sqlalchemy import Column, String, Numeric, Text, TIMESTAMP, Enum, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from app.database import Base
+from app.model.enums import pg_feedback_enum
 
-class EnumInterviewFeedback(str, enum.Enum):
-    waiting = "waiting"
-    strong_yes = "strong_yes"
-    lean_yes = "lean_yes"
-    neutral = "neutral"
-    hold = "hold"
-    lean_no = "lean_no"
-    strong_no = "strong_no"
-    eliminated = "eliminated"
-    red_flag = "red_flag"
 
 class ApplicationStage(Base):
     __tablename__ = "application_stage"
@@ -25,5 +16,5 @@ class ApplicationStage(Base):
     stage_title = Column(String(20), nullable=False)
     stage_details = Column(Text)
     duration_minutes = Column(Numeric(3, 0), nullable=False)
-    feedback = Column(Enum(EnumInterviewFeedback), nullable=False)
+    feedback = Column(pg_feedback_enum, nullable=False)
     updated_at = Column(TIMESTAMP(timezone=True))

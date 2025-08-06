@@ -7,7 +7,7 @@ from app.model.enums import pg_tier_enum
 
 class Company(Base):
     __tablename__ = "company"
-    __table_args__ = {"schema": "core"}
+    __table_args__: dict[str, str] = {"schema": "core"}
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = Column(String(20), nullable=False)
